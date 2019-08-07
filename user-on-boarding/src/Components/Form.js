@@ -1,25 +1,26 @@
 import React from 'react';
 import axios from 'axios';
-import { Form, Field, withFormik, yupToFormErrors } from 'formik';
+import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 
 const UserForm = ({ errors, touched, values }) => {
 	return (
 		<div className="user-form">
-			<h1>User Form</h1>
+			<h1 className="user-form-h1">User Form</h1>
 			<Form>
-				<Field className="form-input" type="text" name="username" placeholder="username" />
 				{touched.username && errors.username && <p className="error">{errors.username}</p>}
+				<Field className="form-input" type="text" name="username" placeholder="username" />
 
-				<Field className="form-input" type="email" name="email" placeholder="email" />
 				{touched.email && errors.email && <p className="error">{errors.email}</p>}
+				<Field className="form-input" type="email" name="email" placeholder="email" />
 
-				<Field className="form-input" type="password" name="password" placeholder="password" />
 				{touched.password && errors.password && <p className="error">{errors.password}</p>}
+				<Field className="form-input" type="password" name="password" placeholder="password" />
 
-				<label>
-					I've read Terms and Conditions
+				<label className="form-checkbox-label">
+					{touched.terms && errors.terms && <p className="error">{errors.terms}</p>}
 					<Field className="form-checkbox" type="checkbox" name="terms" checked={values.terms} />
+					I've read Terms and Conditions
 				</label>
 
 				<button type="submit">Submit</button>
@@ -39,10 +40,10 @@ const FormikUserForm = withFormik({
 	},
 
 	validationSchema: Yup.object().shape({
-		username: Yup.string().required(),
+		username: Yup.string().required('* Must enter a username'),
 		email: Yup.string().required(),
-		password: Yup.string().required(),
-		terms: Yup.boolean().required()
+		password: Yup.string().required('* Must enter a username'),
+		terms: Yup.boolean().required('* please agree to terms and conditions before submitting')
 	}),
 
 	handleSubmit(values) {
