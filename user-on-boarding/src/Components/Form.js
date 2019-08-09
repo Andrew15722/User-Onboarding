@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
+// TODO Need to finish step 4
 
 const UserForm = ({ errors, touched, values }) => {
 	return (
@@ -41,9 +42,9 @@ const FormikUserForm = withFormik({
 
 	validationSchema: Yup.object().shape({
 		username: Yup.string().required('* Must enter a username'),
-		email: Yup.string().required(),
-		password: Yup.string().required('* Must enter a username'),
-		terms: Yup.boolean().required('* please agree to terms and conditions before submitting')
+		email: Yup.string().required('* Must enter a email'),
+		password: Yup.string().required('* Must enter a password'),
+		terms: Yup.boolean().required()
 	}),
 
 	handleSubmit(values) {
